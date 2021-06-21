@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40"
+   height="40"
+   viewBox="0 0 10.583333 10.583334"
+   version="1.1"
+   id="svg5103"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5100" />
+  <g
+     id="layer1">
+    <g
+       id="g200"
+       transform="matrix(0.09187542,0,0,0.09187542,-35.676962,-82.560346)">
+      <circle
+         fill="#d5e1e5"
+         stroke="#27679c"
+         stroke-width="11.3386"
+         stroke-miterlimit="10"
+         cx="445.91501"
+         cy="956.20801"
+         r="49.047001"
+         id="circle188" />
+      <line
+         fill="#d5e1e5"
+         stroke="#27679c"
+         stroke-width="11.3386"
+         stroke-linecap="round"
+         stroke-miterlimit="10"
+         x1="445.91501"
+         y1="956.20801"
+         x2="445.91501"
+         y2="925.047"
+         id="line190" />
+      <line
+         fill="#d5e1e5"
+         stroke="#27679c"
+         stroke-width="11.3386"
+         stroke-linecap="round"
+         stroke-miterlimit="10"
+         x1="445.91501"
+         y1="956.20801"
+         x2="460.849"
+         y2="969.30798"
+         id="line192" />
+      <path
+         display="none"
+         fill="none"
+         stroke="#457d99"
+         stroke-width="19.8425"
+         stroke-linecap="round"
+         stroke-miterlimit="10"
+         d="m 383.046,1017.256 c -11.395,-9.107 -18.988,-25.424 -18.988,-44.038 0,-20.301 5.486,-33.246 18.988,-44.038"
+         id="path194" />
+      <path
+         display="none"
+         fill="none"
+         stroke="#457d99"
+         stroke-width="19.8425"
+         stroke-linecap="round"
+         stroke-miterlimit="10"
+         d="m 345.306,1006.692 c -6.377,-9.021 -10.226,-20.707 -10.226,-33.475 0,-12.579 3.735,-24.108 9.944,-33.073"
+         id="path196" />
+      <path
+         display="none"
+         fill="none"
+         stroke="#07583d"
+         stroke-width="11.3386"
+         stroke-linecap="round"
+         stroke-miterlimit="10"
+         d="m 338.07,998.535 c -3.26,-7.284 -5.109,-15.616 -5.109,-24.468 0,-8.852 1.85,-17.184 5.109,-24.468"
+         id="path198" />
+    </g>
+  </g>
+</svg>
