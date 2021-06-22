@@ -247,6 +247,21 @@ main {
   }
 }
 
+.popin-small {
+  animation: popin-small 0.4s ease-out 1;
+}
+@keyframes popin-small {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .popdown {
   animation: popdown 0.4s ease-out 1;
 }

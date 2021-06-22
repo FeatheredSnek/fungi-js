@@ -118,7 +118,7 @@ class Renderer {
       this.wiggleSlot(slotElement)
     }
   }
-  
+
   getSlotImageSource (type, stage) {
     return `images/fungi/${type}-${stage}.svg`
   }
@@ -159,10 +159,11 @@ class Renderer {
     this.timeCounterDOMElement.textContent = this.game.time
   }
 
-  buttonPopIn (buttonDOMElement) {
-    buttonDOMElement.classList.add('popin')
+  buttonPopIn (buttonDOMElement, small) {
+    let classSizeName = small ? 'popin-small' : 'popin'
+    buttonDOMElement.classList.add(classSizeName)
     setTimeout(function() {
-      buttonDOMElement.classList.remove('popin')
+      buttonDOMElement.classList.remove(classSizeName)
     }, 500)
   }
 

@@ -46,13 +46,14 @@ function slotPickupHandler () {
 }
 
 function sellHandler () {
-  renderer.buttonPopIn(this)
   let response = currentGame.sellInventory()
   if (response === Game.actionResponses.INVENTORY_NOT_SELLABLE) {
+    renderer.buttonPopIn(this, 'small')
     renderer.wiggleInventory()
     renderer.renderWarning('inventory_not_sellable')
   }
   else {
+    renderer.buttonPopIn(this)
     renderer.updateInventory()
     renderer.updateGoldCounter()
     renderer.updateTimeCounter()
