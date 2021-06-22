@@ -36,6 +36,14 @@ class Inventory {
     if (!this.isFull()) {
       return false
     }
+    else {
+      let sellValue = this.getTotalValue(mushroomTable)
+      this.slots.forEach(slot => slot.empty())
+      return sellValue
+    }
+  }
+
+  getTotalValue (mushroomTable) {
     let sameType = this.slots.every(el => el.type == this.slots[0].type)
     let sameStage = this.slots.every(el => el.stage == this.slots[0].stage)
     let multiplier = 1
@@ -47,11 +55,15 @@ class Inventory {
     }
     let sellValue = 0
     for (let slot of this.slots) {
-      let slotValue = mushroomTable.find(mushroom => mushroom.name === slot.type).value
+      let slotValue = 0
+      let slotTableEquivalent = mushroomTable.find(mushroom => mushroom.name === slot.type)
+      if (slotTableEquivalent) {
+        slotValue = slotTableEquivalent.value
+      }
+      // let slotValue = mushroomTable.find(mushroom => mushroom.name === slot.type).value
       sellValue += slotValue
     }
     sellValue *= multiplier
-    this.slots.forEach(slot => slot.empty())
     return sellValue
   }
 

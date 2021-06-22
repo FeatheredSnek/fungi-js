@@ -118,23 +118,7 @@ class Renderer {
       this.wiggleSlot(slotElement)
     }
   }
-
-  // popinSlot (slotDOMElement) {
-  //   let slotImage = slotDOMElement.children[0]
-  //   slotImage.classList.add('wiggle')
-  //   setTimeout(function() {
-  //     slotImage.classList.remove('wiggle')
-  //   }, 500)
-  // }
-  //
-  // animateSlot (slotDOMElement, animationName, animationTime) {
-  //   let slotImage = slotDOMElement.children[0]
-  //   slotImage.classList.add(animationName)
-  //   setTimeout(function() {
-  //     slotImage.classList.remove(animationName)
-  //   }, animationTime)
-  // }
-
+  
   getSlotImageSource (type, stage) {
     return `images/fungi/${type}-${stage}.svg`
   }
@@ -171,9 +155,7 @@ class Renderer {
   updateTimeCounter () {
     let timeCounterIcon = this.timeCounterDOMElement.previousElementSibling
     timeCounterIcon.classList.add('popout')
-    setTimeout(function() {
-      timeCounterIcon.classList.remove('popout')
-    }, 500)
+    setTimeout(() => timeCounterIcon.classList.remove('popout'), 500)
     this.timeCounterDOMElement.textContent = this.game.time
   }
 

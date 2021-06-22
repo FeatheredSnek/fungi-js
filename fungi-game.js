@@ -70,7 +70,9 @@ class Game {
   }
 
   checkLegalMoves () {
-    let inventoryCondition = this.inventory.isFull()
+    let inventoryContentCondition = this.inventory.isFull()
+    let inventoryValueCondition = this.inventory.getTotalValue(this.mushroomTable) + this.gold > 0
+    let inventoryCondition = inventoryContentCondition && inventoryValueCondition
     let advanceCondition = this.gold >= this.advanceCost
     let boardPickupCondition = false
     for (let slot of this.board) {
