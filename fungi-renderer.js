@@ -42,6 +42,10 @@ class Renderer {
     slotDOMElement.setAttribute('type', 'null')
     slotDOMElement.setAttribute('stage', 'null')
     containerDOMElement.append(slotDOMElement)
+    // generate and add grassy background for board slots
+    if (containerDOMElement == this.boardDOMElement) {
+      slotDOMElement.setAttribute('style', this.getGrassBackgroundRule())
+    }
     // render its contents
     this.renderSlot(slotData, slotDOMElement, true)
   }
@@ -197,6 +201,31 @@ class Renderer {
       },
     200)
     setTimeout(() => this.hideOverlay(), 100)
+  }
+
+  getGrassBackgroundRule () {
+    let backgroundRule = 'background-image: '
+    let backgroundPositionRule = 'background-position: '
+    let backgroundRepeatRule = 'background-repeat: '
+    let backgroundSizeRule = 'background-size: '
+    let seed = Math.random()
+    let blades = seed > 0.5 ? 2 : 3
+    for (let i = 0; i < blades; i++) {
+      seed = Math.random()
+      let color = seed > 0.5 ? 'dark' : 'light'
+      seed = Math.random()
+      let size = seed < 0.33 ? 'small' : seed > 0.33 && seed < 0.66 ? 'medium' : 'big'
+      let url = `url(images/ui/grass-${color}-${size}.svg)`
+      let positionX = Math.floor(Math.random() * (90 - 10 + 1)) + 10
+      let positionY = Math.floor(Math.random() * (90 - 10 + 1)) + 10
+      let ending = i == blades - 1 ? ';' : ', '
+      backgroundRule += `${url}${ending}`
+      backgroundPositionRule += `${positionX}% ${positionY}%${ending}`
+      backgroundRepeatRule += `no-repeat${ending}`
+      backgroundSizeRule += `15%${ending}`
+    }
+    let output = backgroundRule + backgroundPositionRule + backgroundRepeatRule + backgroundSizeRule
+    return output
   }
 
 }
