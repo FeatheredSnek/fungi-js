@@ -17,8 +17,14 @@
   --sell-bg-color: #a265b3;
   --advance-border-color: #457d99;
   --advance-bg-color: #488fb4;
+  --overlay-fade-color: rgba(55, 55, 77, 0.55);
+  --overlay-bg-color: #37374d;
+  --overlay-border-color: #232333;
+  --gameover-bg-color: #79afb8;
+  --gameover-border-color: #4a6b70;
   --font-color-standard: black;
   --font-color-warning: red;
+  --font-color-overlay: #79afb8;
 }
 
 * {
@@ -33,6 +39,7 @@ body {
 }
 
 main {
+  position: relative;
   padding: 3rem;
   display: block;
   width: 36rem;
@@ -310,12 +317,15 @@ main {
   justify-content: space-between;
 }
 
+.buttons > button {
+  width: 50%;
+}
+
 button {
   display: block;
   border-radius: var(--corners-big);
   border-width: var(--border-medium);
   border-style: solid;
-  width: 47%;
   height: 10rem;
   background-repeat: no-repeat;
   background-size:
@@ -327,6 +337,7 @@ button {
 }
 
 .sell {
+  margin-right: 1rem;
   border-color: var(--sell-border-color);
   background-color: var(--sell-bg-color);
   background-image:
@@ -335,9 +346,63 @@ button {
 }
 
 .advance {
+  margin-left: 1rem;
   border-color: var(--advance-border-color);
   background-color: var(--advance-bg-color);
   background-image:
     url('images/ui/button-advance-arrow.svg'),
     url('images/ui/button-advance-icon.svg');
+}
+
+.restart {
+  width: 100%;
+  height: 12rem;
+  border-color: var(--gameover-border-color);
+  background-color: var(--gameover-bg-color);
+  background-image:
+    url('images/ui/button-restart-arrow.svg'),
+    url('images/ui/button-restart-icon.svg');
+}
+
+.overlay {
+  z-index: 2;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  border-radius: var(--corners-big);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--overlay-fade-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay > div {
+  width: 24rem;
+  padding: 3rem;
+  color: var(--font-color-overlay);
+  background-color: var(--app-bg-color);
+  border-radius: var(--corners-big);
+  border-width: var(--border-medium);
+  border-style: solid;
+}
+
+.gameover-text {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.big {
+  line-height: 5rem;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.smol {
+  margin-bottom: 3rem;
+  font-size: 1.8rem;
 }
