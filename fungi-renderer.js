@@ -10,6 +10,7 @@ class Renderer {
     this.inventoryDOMElement = inventoryDOMElement
     this.goldCounterDOMElement = goldCounterDOMElement
     this.timeCounterDOMElement = timeCounterDOMElement
+    this.overlayDOMElement = overlayDOMElement
   }
 
   initialRender () {
@@ -187,7 +188,20 @@ class Renderer {
     console.warn(warningType);
   }
 
-  renderFailState (warningType) {
-    console.error(warningType);
+  showOverlay () {
+    this.overlayDOMElement.classList.remove('hidden')
+    setTimeout(() => this.overlayDOMElement.classList.remove('invisible'), 50)
+    setTimeout(() => this.overlayDOMElement.children[0].classList.remove('shifted-up'), 50)
+  }
+
+  hideOverlay () {
+    this.overlayDOMElement.children[0].classList.add('shifted-down')
+    this.overlayDOMElement.classList.add('invisible')
+    setTimeout(() => this.overlayDOMElement.classList.add('hidden'), 550)
+    setTimeout(() => this.overlayDOMElement.classList.add('shifted-up'), 600)
+  }
+
+  renderFailState () {
+    this.showOverlay()
   }
 }

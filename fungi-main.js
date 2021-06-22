@@ -4,9 +4,11 @@ const boardDOMElement = document.getElementById('board')
 const inventoryDOMElement = document.getElementById('inventory')
 const goldCounterDOMElement = document.getElementById('gold-counter')
 const timeCounterDOMElement = document.getElementById('time-counter')
+const overlayDOMElement = document.getElementById('overlay')
 
 const buttonAdvanceDOMElement = document.getElementById('button-advance')
 const buttonSellDOMElement = document.getElementById('button-sell')
+const buttonRestartDOMElement = document.getElementById('button-restart')
 
 let currentGame
 let renderer
@@ -61,7 +63,7 @@ function sellHandler () {
 }
 
 function failStateHandler () {
-  renderer.renderFailState('no legal moves')
+  renderer.renderFailState()
   removeEvents()
 }
 
@@ -88,7 +90,8 @@ function _init() {
     boardDOMElement,
     inventoryDOMElement,
     goldCounterDOMElement,
-    timeCounterDOMElement
+    timeCounterDOMElement,
+    overlayDOMElement
   )
   renderer.initialRender()
   connectEvents()
