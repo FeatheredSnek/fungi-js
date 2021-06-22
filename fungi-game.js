@@ -23,6 +23,7 @@ class Game {
       this.populationTresholds.push(currentTreshold)
     }
     this.repopulationFactor = settings.repopulationFactor
+    this.startingGold = settings.startingGold
     this.gold = settings.startingGold
     this.time = 0
     this.inventory = new Inventory(inventorySize)
@@ -84,6 +85,14 @@ class Game {
       this.state = false
       return Game.actionResponses.NO_LEGAL_MOVES
     }
+  }
+
+  restart () {
+    this.state = true
+    this.gold = this.startingGold
+    this.time = 0
+    this.board.forEach(slot => slot.empty())
+    this.inventory.empty()
   }
 
   previewInventory() {

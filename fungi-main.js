@@ -67,12 +67,21 @@ function failStateHandler () {
   removeEvents()
 }
 
+function restartHandler () {
+  renderer.buttonPopIn(this)
+  currentGame.restart()
+  renderer.restart()
+  connectEvents()
+  console.log('restart');
+}
+
 function connectEvents () {
   for (let childNode of boardDOMElement.children) {
     childNode.addEventListener('click', slotPickupHandler)
   }
   buttonAdvanceDOMElement.addEventListener('click', advanceHandler)
   buttonSellDOMElement.addEventListener('click', sellHandler)
+  buttonRestartDOMElement.addEventListener('click', restartHandler)
 }
 
 function removeEvents () {

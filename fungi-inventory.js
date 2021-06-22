@@ -64,4 +64,8 @@ class Inventory {
     }
   }
 
+  empty () {
+    this.slots.forEach(slot => slot.empty())
+  }
+
 }

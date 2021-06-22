@@ -204,4 +204,16 @@ class Renderer {
   renderFailState () {
     this.showOverlay()
   }
+
+  restart () {
+    setTimeout(() => {
+        this.updateBoard();
+        this.updateInventory();
+        this.updateGoldCounter();
+        this.updateTimeCounter();
+      },
+    200)
+    setTimeout(() => this.hideOverlay(), 100)
+  }
+
 }
