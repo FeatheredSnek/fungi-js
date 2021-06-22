@@ -9,7 +9,7 @@ class Settings {
         {
           name: 'amanita',
           value: 10,
-          frequency: 3
+          frequency: 4
         },
         {
           name: 'cortinarius',
@@ -17,12 +17,22 @@ class Settings {
           frequency: 6
         },
         {
+          name: 'chanterelle',
+          value: 15,
+          frequency: 2
+        },
+        {
+          name: 'indigo',
+          value: 25,
+          frequency: 0.5
+        },
+        {
           name: 'rock',
           value: 0,
-          frequency: 1.5
+          frequency: 3
         }
       ],
-      emptySlotFrequency: 5,
+      emptySlotFrequency: 8,
       repopulationFactor: 0.3,
       advanceCost: 10,
       pickupCost: 5,
