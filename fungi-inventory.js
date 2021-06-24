@@ -32,36 +32,59 @@ class Inventory {
     }
   }
 
-  sell (mushroomTable) {
+  sell (
+    mushroomTable,
+    stageBonusExponent,
+    sameTypeBonusMultiplier,
+    sameStageBonusMultiplier,
+    tricolorBonus)
+    {
     if (!this.isFull()) {
       return false
     }
     else {
-      let sellValue = this.getTotalValue(mushroomTable)
+      let sellValue = this.getTotalValue(
+        mushroomTable,
+        stageBonusExponent,
+        sameTypeBonusMultiplier,
+        sameStageBonusMultiplier,
+        tricolorBonus)
       this.slots.forEach(slot => slot.empty())
       return sellValue
     }
   }
 
-  getTotalValue (mushroomTable) {
+  getTotalValue (
+    mushroomTable,
+    stageBonusExponent,
+    sameTypeBonusMultiplier,
+    sameStageBonusMultiplier,
+    tricolorBonus)
+    {
     let sameType = this.slots.every(el => el.type == this.slots[0].type)
     let sameStage = this.slots.every(el => el.stage == this.slots[0].stage)
     let multiplier = 1
     if (sameType) {
-      multiplier *= 3
+      multiplier *= sameTypeBonusMultiplier
     }
     if (sameStage) {
-      multiplier *= 2
+      multiplier *= sameStageBonusMultiplier
     }
     let sellValue = 0
     for (let slot of this.slots) {
       let slotValue = 0
       let slotTableEquivalent = mushroomTable.find(mushroom => mushroom.name === slot.type)
       if (slotTableEquivalent) {
-        slotValue = slotTableEquivalent.value
+        slotValue = slotTableEquivalent.value * slot.stage + Math.pow(slot.stage - 1, stageBonusExponent)
       }
-      // let slotValue = mushroomTable.find(mushroom => mushroom.name === slot.type).value
       sellValue += slotValue
+    }
+    if (this.isFull()) {
+      let valueSet = new Set()
+      this.slots.every(el => valueSet.add(el.type))
+      if (valueSet.size == this.slots.length) {
+        sellValue += tricolorBonus
+      }
     }
     sellValue *= multiplier
     return sellValue

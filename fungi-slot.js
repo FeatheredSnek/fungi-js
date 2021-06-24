@@ -65,8 +65,9 @@ class Slot {
     }
   }
 
-  getPickupCost (baseCost, pickupPenalty) {
-    let cost = baseCost + (this.stage - 1) * pickupPenalty
+  getPickupCost (baseCost, pickupPenalty, pickupPenaltyExponent) {
+    // let cost = baseCost + (this.stage - 1) * pickupPenalty
+    let cost = baseCost + pickupPenalty * Math.pow(this.stage-1 , pickupPenaltyExponent)
     return cost
   }
 

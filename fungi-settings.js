@@ -36,8 +36,14 @@ class Settings {
       repopulationFactor: 0.3,
       advanceCost: 10,
       pickupCost: 5,
-      pickupPenalty: 10,
-      startingGold: 100
+      pickupPenalty: 15,
+      pickupPenaltyExponent: 2,
+      stageBonusExponent: 2,
+      sameTypeBonusMultiplier: 3,
+      sameStageBonusMultiplier: 2,
+      tricolorBonus: 20,
+      startingGold: 100,
+      maxGoldCap: 9999
     }
     return settings
   }

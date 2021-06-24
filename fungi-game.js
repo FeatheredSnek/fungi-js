@@ -10,10 +10,17 @@ class Game {
 
   constructor (boardSize, inventorySize, settings) {
     this.state = true
+
     this.mushroomTable = settings.mushrooms
     this.advanceCost = settings.advanceCost
     this.pickupCost = settings.pickupCost
     this.pickupPenalty = settings.pickupPenalty
+    this.pickupPenaltyExponent = settings.pickupPenaltyExponent
+    this.stageBonusExponent = settings.stageBonusExponent
+    this.sameTypeBonusMultiplier = settings.sameTypeBonusMultiplier
+    this.sameStageBonusMultiplier = settings.sameStageBonusMultiplier
+    this.tricolorBonus = settings.tricolorBonus
+
     this.frequencySum = settings.emptySlotFrequency
     settings.mushrooms.forEach(mushroom => this.frequencySum += mushroom.frequency)
     this.populationTresholds = []
@@ -23,9 +30,12 @@ class Game {
       this.populationTresholds.push(currentTreshold)
     }
     this.repopulationFactor = settings.repopulationFactor
+
     this.startingGold = settings.startingGold
     this.gold = settings.startingGold
+    this.maxGoldCap = settings.maxGoldCap
     this.time = 0
+
     this.inventory = new Inventory(inventorySize)
     this.board = []
     for (let i = 0; i < boardSize; i++) {
@@ -46,7 +56,7 @@ class Game {
   pickUpFromBoard (slotId) {
     // if (this.board[slotId].type != null && this.board[slotId].type != 'rock') {
     if (this.board[slotId].isPickable() && !this.inventory.isFull()) {
-      this.gold -= this.board[slotId].getPickupCost(this.pickupCost, this.pickupPenalty)
+      this.gold -= this.board[slotId].getPickupCost(this.pickupCost, this.pickupPenalty, this.pickupPenaltyExponent)
       this.inventory.add(this.board[slotId].pickUp())
       return this.checkLegalMoves()
     }
@@ -59,7 +69,13 @@ class Game {
   }
 
   sellInventory() {
-    let sellValue = this.inventory.sell(this.mushroomTable)
+    let sellValue = this.inventory.sell(
+      this.mushroomTable,
+      this.stageBonusExponent,
+      this.sameTypeBonusMultiplier,
+      this.sameStageBonusMultiplier,
+      this.tricolorBonus
+    )
     if (sellValue) {
       this.gold += sellValue
       return this.checkLegalMoves()
@@ -71,12 +87,18 @@ class Game {
 
   checkLegalMoves () {
     let inventoryContentCondition = this.inventory.isFull()
-    let inventoryValueCondition = this.inventory.getTotalValue(this.mushroomTable) + this.gold > 0
+    let inventoryValueCondition = this.inventory.getTotalValue(
+      this.mushroomTable,
+      this.stageBonusExponent,
+      this.sameTypeBonusMultiplier,
+      this.sameStageBonusMultiplier,
+      this.tricolorBonus
+    ) + this.gold > 0
     let inventoryCondition = inventoryContentCondition && inventoryValueCondition
     let advanceCondition = this.gold >= this.advanceCost
     let boardPickupCondition = false
     for (let slot of this.board) {
-      if (slot.isPickable() && slot.getPickupCost(this.pickupCost, this.pickupPenalty) <= this.gold) {
+      if (slot.isPickable() && slot.getPickupCost(this.pickupCost, this.pickupPenalty, this.pickupPenaltyExponent) <= this.gold) {
         boardPickupCondition = true
       }
     }
