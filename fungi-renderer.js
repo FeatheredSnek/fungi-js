@@ -13,6 +13,13 @@ class Renderer {
     this.overlayDOMElement = overlayDOMElement
   }
 
+  static animationTimes = {
+    slotAction: 700,
+    slotWarning: 500,
+    buttonAction: 500,
+    restartAction: 800
+  }
+
   initialRender () {
     this.createBoard()
     this.createInventory()
@@ -90,7 +97,7 @@ class Renderer {
       slotImage.alt = this.getSlotDescription(slotData.type, slotData.stage)
       setTimeout(function() {
         slotImage.classList.remove('grow')
-      }, 700)
+      }, Renderer.animationTimes.slotAction)
     }
     // full into empty => disappear
     else if (slotData.type == null && slotData.stage == null && slotImage.className == 'full') {
@@ -101,7 +108,7 @@ class Renderer {
         slotImage.src = ''
         slotImage.alt = 'empty slot'
         slotImage.className = 'empty'
-      }, 700)
+      }, Renderer.animationTimes.slotAction)
     }
     // empty into empty => do nothing
     else if (slotData.type == null && slotData.stage == null && slotImage.className == 'empty') {
@@ -114,7 +121,7 @@ class Renderer {
     slotImage.classList.add('wiggle')
     setTimeout(function() {
       slotImage.classList.remove('wiggle')
-    }, 500)
+    }, Renderer.animationTimes.slotWarning)
   }
 
   wiggleInventory () {
@@ -139,13 +146,13 @@ class Renderer {
       goldCounterIcon.classList.add('popout')
       setTimeout(function() {
         goldCounterIcon.classList.remove('popout')
-      }, 500)
+      }, Renderer.animationTimes.buttonAction)
     }
     else {
       goldCounterIcon.classList.add('popdown')
       setTimeout(function() {
         goldCounterIcon.classList.remove('popdown')
-      }, 500)
+      }, Renderer.animationTimes.buttonAction)
     }
     if (newGold < 0) {
       this.goldCounterDOMElement.className = 'negative'
@@ -159,7 +166,7 @@ class Renderer {
   updateTimeCounter () {
     let timeCounterIcon = this.timeCounterDOMElement.previousElementSibling
     timeCounterIcon.classList.add('popout')
-    setTimeout(() => timeCounterIcon.classList.remove('popout'), 500)
+    setTimeout(() => timeCounterIcon.classList.remove('popout'), Renderer.animationTimes.buttonAction)
     this.timeCounterDOMElement.textContent = this.game.time
   }
 
@@ -168,7 +175,7 @@ class Renderer {
     buttonDOMElement.classList.add(classSizeName)
     setTimeout(function() {
       buttonDOMElement.classList.remove(classSizeName)
-    }, 500)
+    }, Renderer.animationTimes.buttonAction)
   }
 
   renderWarning (warningType) {

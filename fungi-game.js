@@ -40,14 +40,19 @@ class Game {
     this.board = []
     for (let i = 0; i < boardSize; i++) {
       this.board.push(new Slot())
-      this.board[i].populateRandom(this.mushroomTable, this.populationTresholds, this.frequencySum)
+      // this.board[i].populateRandom(this.mushroomTable, this.populationTresholds, this.frequencySum)
+    }
+  }
+
+  populateBoard () {
+    for (let slot of this.board) {
+      slot.empty()
+      slot.advance(this.mushroomTable, this.populationTresholds, this.frequencySum, this.repopulationFactor)
     }
   }
 
   advanceBoard () {
-    for (let slot of this.board) {
-      slot.advance(this.mushroomTable, this.populationTresholds, this.frequencySum, this.repopulationFactor)
-    }
+    this.board.forEach(slot => slot.advance(this.mushroomTable, this.populationTresholds, this.frequencySum, this.repopulationFactor))
     this.time += 1
     this.gold -= this.advanceCost
     return this.checkLegalMoves()
@@ -111,12 +116,12 @@ class Game {
     }
   }
 
-  restart () {
+  start () {
     this.state = true
     this.gold = this.startingGold
     this.time = 0
-    this.board.forEach(slot => slot.empty())
     this.inventory.empty()
+    this.populateBoard()
   }
 
   previewInventory() {
