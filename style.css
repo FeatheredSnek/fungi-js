@@ -104,7 +104,7 @@ main {
 }
 
 
-.board > .grid > div {
+.board > .grid > .slot {
   /* width: 100%;
   height: 8.5rem; */
   /* padding-top: 100%; */
@@ -127,11 +127,15 @@ main {
   padding: var(--slot-gap);
 }
 
-.inventory > .grid > div {
+.inventory > .grid > .slot {
   /* width: 100%;
   height: 8.5rem; */
   /* border-radius: var(--corners-small); */
   background-color: var(--inventory-bg-color);
+  background-image: url('images/ui/inventory-slot-bg.svg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 105%;
 }
 
 .slot {

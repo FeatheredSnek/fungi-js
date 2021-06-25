@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="140"
+   height="60"
+   viewBox="0 0 37.041666 15.875"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="inventory-slot-bg.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     width="140px"
+     inkscape:zoom="2.6832492"
+     inkscape:cx="-24.038021"
+     inkscape:cy="55.343351"
+     inkscape:window-width="1852"
+     inkscape:window-height="1016"
+     inkscape:window-x="68"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect981"
+       style="opacity:1;vector-effect:none;fill:#b28415;stroke-width:6.51374;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stop-color:#000000;stop-opacity:1;fill-opacity:1"
+       d="m 9.1413785,1.5e-7 c -5.06447,0 -9.14138,3.99546995 -9.14138,8.95879995 V 15.875 c 0,-4.96333 4.07691,-8.9588099 9.14138,-8.9588099 H 27.900288 c 5.06447,0 9.14138,3.9954799 9.14138,8.9588099 V 8.9588001 c 0,-4.96333 -4.07691,-8.95879995 -9.14138,-8.95879995 z" />
+  </g>
+</svg>
