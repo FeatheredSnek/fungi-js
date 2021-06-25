@@ -82,7 +82,7 @@ class Game {
       this.tricolorBonus
     )
     if (sellValue) {
-      this.gold += sellValue
+      this.gold = Math.min(this.gold + sellValue, this.maxGoldCap)
       return this.checkLegalMoves()
     }
     else {
