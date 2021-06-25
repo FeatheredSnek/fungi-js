@@ -8,7 +8,8 @@
   --border-wide: 2rem;
   --border-medium: 1.2rem;
   /* colors (dark mode?) */
-  --app-bg-color: #37374d;
+  --app-bg-color: #565678;
+  --app-window-color: #37374d;
   --board-border-color: #669840;
   --board-bg-color: #77aa49;
   --inventory-border-color: #a57414;
@@ -37,6 +38,8 @@ body {
   margin: 0;
   color: var(--font-color-standard);
   font-family: 'Fredoka One', sans-serif;
+  background-color: var(--app-bg-color);
+  margin-top: 2rem;
 }
 
 main {
@@ -44,7 +47,7 @@ main {
   padding: 3rem;
   display: block;
   width: 36rem;
-  background-color: var(--app-bg-color);
+  background-color: var(--app-window-color);
   margin: auto;
   border-radius: var(--corners-big);
 }
@@ -423,7 +426,7 @@ button {
   width: 24rem;
   padding: 3rem;
   color: var(--font-color-overlay);
-  background-color: var(--app-bg-color);
+  background-color: var(--app-window-color);
   border-radius: var(--corners-big);
   border-width: var(--border-medium);
   border-style: solid;
@@ -440,7 +443,7 @@ button {
   transform: translateY(30rem);
 }
 
-.gameover-text {
+.overlay-text {
   width: 100%;
   text-align: center;
   margin: 0;
