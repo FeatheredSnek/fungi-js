@@ -113,6 +113,10 @@ main {
   background-color: var(--board-bg-color);
 }
 
+.board > .grid > .slot > .full {
+  cursor: pointer;
+}
+
 /* .board > .grid > div > * {
   position: absolute;
   top: 0;
@@ -341,7 +345,12 @@ main {
   width: 50%;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 button {
+  cursor: pointer;
   display: block;
   border-radius: var(--corners-big);
   border-width: var(--border-medium);
