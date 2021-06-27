@@ -76,7 +76,7 @@ function sellHandler () {
 function restartHandler () {
   lockControls(Renderer.animationTimes.restartAction)
   renderer.buttonPopIn(this)
-  currentGame.start()
+  currentGame.actionStart()
   renderer.restart()
   connectEvents()
   console.log('restart');
@@ -122,7 +122,7 @@ function _init() {
     timeCounterDOMElement,
     overlayDOMElement
   )
-  currentGame.start()
+  currentGame.actionStart()
   renderer.initialRender()
   connectEvents()
 }
