@@ -95,16 +95,14 @@ class Renderer {
       slotImage.classList.add('grow')
       slotImage.src = this.getSlotImageSource(slotData.type, slotData.stage)
       slotImage.alt = this.getSlotDescription(slotData.type, slotData.stage)
-      setTimeout(function() {
-        slotImage.classList.remove('grow')
-      }, Renderer.animationTimes.slotAction)
+      setTimeout(() => slotImage.classList.remove('grow'), Renderer.animationTimes.slotAction)
     }
     // full into empty => disappear
     else if (slotData.type == null && slotData.stage == null && slotImage.className == 'full') {
       slotDOMElement.setAttribute('type', slotData.type)
       slotDOMElement.setAttribute('stage', slotData.stage)
       slotImage.classList.add('disappear')
-      setTimeout(function() {
+      setTimeout(() => {
         slotImage.src = ''
         slotImage.alt = 'empty slot'
         slotImage.className = 'empty'
@@ -119,9 +117,7 @@ class Renderer {
   wiggleSlot (slotDOMElement) {
     let slotImage = slotDOMElement.children[0]
     slotImage.classList.add('wiggle')
-    setTimeout(function() {
-      slotImage.classList.remove('wiggle')
-    }, Renderer.animationTimes.slotWarning)
+    setTimeout(() => slotImage.classList.remove('wiggle'), Renderer.animationTimes.slotWarning)
   }
 
   wiggleInventory () {
@@ -154,12 +150,7 @@ class Renderer {
         goldCounterIcon.classList.remove('popdown')
       }, Renderer.animationTimes.buttonAction)
     }
-    if (newGold < 0) {
-      this.goldCounterDOMElement.className = 'negative'
-    }
-    else {
-      this.goldCounterDOMElement.className = ''
-    }
+    this.goldCounterDOMElement.className = newGold < 0 ? 'negative-value' : ''
     this.goldCounterDOMElement.textContent = this.game.gold
   }
 
@@ -173,13 +164,7 @@ class Renderer {
   buttonPopIn (buttonDOMElement, small) {
     let classSizeName = small ? 'popin-small' : 'popin'
     buttonDOMElement.classList.add(classSizeName)
-    setTimeout(function() {
-      buttonDOMElement.classList.remove(classSizeName)
-    }, Renderer.animationTimes.buttonAction)
-  }
-
-  renderWarning (warningType) {
-    console.warn(warningType);
+    setTimeout(() => buttonDOMElement.classList.remove(classSizeName), Renderer.animationTimes.buttonAction)
   }
 
   showOverlay () {
@@ -231,8 +216,7 @@ class Renderer {
       backgroundRepeatRule += `no-repeat${ending}`
       backgroundSizeRule += `15%${ending}`
     }
-    let output = backgroundRule + backgroundPositionRule + backgroundRepeatRule + backgroundSizeRule
-    return output
+    return backgroundRule + backgroundPositionRule + backgroundRepeatRule + backgroundSizeRule
   }
 
 }

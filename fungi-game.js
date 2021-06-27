@@ -9,7 +9,6 @@ class Game {
   }
 
   constructor (boardSize, inventorySize, settings) {
-    this.state = true
 
     this.mushroomTable = settings.mushrooms
     this.advanceCost = settings.advanceCost
@@ -40,26 +39,31 @@ class Game {
     this.board = []
     for (let i = 0; i < boardSize; i++) {
       this.board.push(new Slot())
-      // this.board[i].populateRandom(this.mushroomTable, this.populationTresholds, this.frequencySum)
     }
   }
 
-  populateBoard () {
-    for (let slot of this.board) {
-      slot.empty()
-      slot.advance(this.mushroomTable, this.populationTresholds, this.frequencySum, this.repopulationFactor)
-    }
+  clearBoard () {
+    this.board.forEach(slot => slot.empty)
   }
 
   advanceBoard () {
     this.board.forEach(slot => slot.advance(this.mushroomTable, this.populationTresholds, this.frequencySum, this.repopulationFactor))
+    this.previewBoard()
+  }
+
+  repopulateBoard () {
+    this.clearBoard()
+    this.advanceBoard()
+  }
+
+  actionAdvance () {
+    this.advanceBoard()
     this.time += 1
     this.gold -= this.advanceCost
     return this.checkLegalMoves()
   }
 
-  pickUpFromBoard (slotId) {
-    // if (this.board[slotId].type != null && this.board[slotId].type != 'rock') {
+  actionPickup (slotId) {
     if (this.board[slotId].isPickable() && !this.inventory.isFull()) {
       this.gold -= this.board[slotId].getPickupCost(this.pickupCost, this.pickupPenalty, this.pickupPenaltyExponent)
       this.inventory.add(this.board[slotId].pickUp())
@@ -73,7 +77,7 @@ class Game {
     }
   }
 
-  sellInventory() {
+  actionSell() {
     let sellValue = this.inventory.sell(
       this.mushroomTable,
       this.stageBonusExponent,
@@ -111,17 +115,15 @@ class Game {
       return Game.actionResponses.CONTINUE
     }
     else {
-      this.state = false
       return Game.actionResponses.NO_LEGAL_MOVES
     }
   }
 
   start () {
-    this.state = true
     this.gold = this.startingGold
     this.time = 0
     this.inventory.empty()
-    this.populateBoard()
+    this.repopulateBoard()
   }
 
   previewInventory() {
@@ -131,4 +133,5 @@ class Game {
   previewBoard () {
     console.table(this.board)
   }
+
 }

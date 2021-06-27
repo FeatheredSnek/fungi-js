@@ -33,6 +33,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   padding: 0;
   margin: 0;
@@ -51,6 +52,11 @@ main {
   margin: auto;
   border-radius: var(--corners-big);
 }
+
+.component {
+  margin-top: var(--component-gap);
+}
+
 
 .scoreboard {
   color: black;
@@ -73,17 +79,16 @@ main {
 }
 
 .scoreboard > div > img {
-  /* opacity: 0.3; */
   position: relative;
-  /* top: -1rem; */
   left: -0.6rem;
   width: 6rem;
   height: 6rem;
 }
 
-.component {
-  margin-top: var(--component-gap);
+.negative-value {
+  color: var(--font-color-warning);
 }
+
 
 .board {
   background-color: var(--board-border-color);
@@ -108,11 +113,6 @@ main {
 
 
 .board > .grid > .slot {
-  /* width: 100%;
-  height: 8.5rem; */
-  /* padding-top: 100%; */
-  /* position: relative; */
-  /* border-radius: var(--corners-small); */
   background-color: var(--board-bg-color);
 }
 
@@ -120,13 +120,6 @@ main {
   cursor: pointer;
 }
 
-/* .board > .grid > div > * {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-} */
 
 .inventory {
   background-color: var(--inventory-border-color);
@@ -135,9 +128,6 @@ main {
 }
 
 .inventory > .grid > .slot {
-  /* width: 100%;
-  height: 8.5rem; */
-  /* border-radius: var(--corners-small); */
   background-color: var(--inventory-bg-color);
   background-image: url('images/ui/inventory-slot-bg.svg');
   background-repeat: no-repeat;
@@ -145,33 +135,27 @@ main {
   background-size: 105%;
 }
 
+
 .slot {
   width: 100%;
-  /* padding for aspect ratio? */
   height: 8.5rem;
   border-radius: var(--corners-small);
-  /* filter: contrast(0) brightness(200%); */
-  /* animation: slot-blink 2s infinite; */
-  /* animation: slot-blink 1s ease-out 1; */
 }
-/*
-.blink {
-  animation: slotblink 0.2s 1;
-}
-@keyframes slotblink {
-  0% {
-    filter: contrast(100%) brightness(100%);
-  }
-  33% {
-    filter: contrast(0%) brightness(200%);
-  }
-  100% {
-    filter: contrast(100%) brightness(100%);
-  }
-} */
 
-.negative {
-  color: var(--font-color-warning);
+.slot > img {
+  width: 110%;
+  position: relative;
+  left: -5%;
+  top: -5%;
+  object-fit: scale-down;
+}
+
+.slot > .full {
+  display: block;
+}
+
+.slot > .empty {
+  display: none
 }
 
 .grow {
@@ -289,67 +273,14 @@ main {
 }
 
 
-/* .popin {
-  animation: popin 0.5s ease-out 1;
-}
-@keyframes popin {
-  0% {
-    transform: scale(1, 1);
-  }
-  50% {
-    transform: scale(0.8, 0.8);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
-} */
-
-/* .popout {
-  animation: imagepopout 0.6s ease-out 1;
-}
-@keyframes imagepopout {
-  0% {
-    transform: scale(0.1, 0.1);
-  }
-  33% {
-    transform: scale(1.1, 1.2);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
-} */
-
-
-.slot > img {
-  /* max-width: 8rem; */
-  /* height: 100%; */
-  width: 110%;
-  position: relative;
-  left: -5%;
-  top: -5%;
-  object-fit: scale-down;
-}
-
-.slot > .full {
-  display: block;
-}
-
-.slot > .empty {
-  display: none
-}
-
-.buttons {
+.control-buttons {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.buttons > button {
+.control-buttons > button {
   width: 50%;
-}
-
-button:disabled {
-  cursor: not-allowed;
 }
 
 button {
@@ -396,6 +327,7 @@ button {
     url('images/ui/button-restart-icon.svg');
 }
 
+
 .overlay {
   z-index: 2;
   position: absolute;
@@ -409,13 +341,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* opacity: 0; */
   transition: background-color 0.5s linear;
 }
 
 .invisible {
   background-color: var(--overlay-fade-color-from);
-  /* opacity: 0; */
 }
 
 .hidden {
@@ -450,13 +380,13 @@ button {
   padding: 0;
 }
 
-.big {
+.overlay-big {
   line-height: 5rem;
   font-size: 5rem;
   margin-bottom: 1rem;
 }
 
-.smol {
+.overlay-smol {
   margin-bottom: 3rem;
   font-size: 1.8rem;
 }

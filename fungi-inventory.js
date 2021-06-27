@@ -6,29 +6,25 @@ class Inventory {
     }
   }
 
+  empty () {
+    this.slots.forEach(slot => slot.empty())
+  }
+
   add (contents) {
     let freeSlotId = this.slots.findIndex(e => e.type === null)
     if (freeSlotId > -1) {
       this.slots[freeSlotId].type = contents[0]
       this.slots[freeSlotId].stage = contents[1]
     }
-    this.collapse()
+    if (this.isFull() && this.slotsAllIdentical() && this.slots[0].stage < 3) {
+      this.collapse()
+    }
   }
 
   collapse () {
-    for (let i = 1; i < this.slots.length; i++) {
-      if (this.slots[i].type != this.slots[0].type || this.slots[i].stage != this.slots[0].stage) {
-        return false
-      }
-    }
-    if (this.slots[0].stage != null && this.slots[0].stage < 3) {
-      this.slots[0].stage += 1
-      for (let j = 1; j < this.slots.length; j++) {
-        this.slots[j].empty()
-      }
-    }
-    else {
-      return false
+    this.slots[0].stage += 1
+    for (let j = 1; j < this.slots.length; j++) {
+      this.slots[j].empty()
     }
   }
 
@@ -49,7 +45,7 @@ class Inventory {
         sameTypeBonusMultiplier,
         sameStageBonusMultiplier,
         tricolorBonus)
-      this.slots.forEach(slot => slot.empty())
+      this.empty()
       return sellValue
     }
   }
@@ -61,33 +57,30 @@ class Inventory {
     sameStageBonusMultiplier,
     tricolorBonus)
     {
-    let sameType = this.slots.every(el => el.type == this.slots[0].type)
-    let sameStage = this.slots.every(el => el.stage == this.slots[0].stage)
+    let bonus = 0
     let multiplier = 1
-    if (sameType) {
+    if (this.slotsAllSameType()) {
       multiplier *= sameTypeBonusMultiplier
     }
-    if (sameStage) {
+    if (this.slotsAllSameStage()) {
       multiplier *= sameStageBonusMultiplier
     }
-    let sellValue = 0
-    for (let slot of this.slots) {
-      let slotValue = 0
-      let slotTableEquivalent = mushroomTable.find(mushroom => mushroom.name === slot.type)
-      if (slotTableEquivalent) {
-        slotValue = slotTableEquivalent.value * slot.stage + Math.pow(slot.stage - 1, stageBonusExponent)
-      }
-      sellValue += slotValue
+    if (this.isFull() && this.slotsAllDifferent()) {
+      bonus += tricolorBonus
     }
-    if (this.isFull()) {
-      let valueSet = new Set()
-      this.slots.every(el => valueSet.add(el.type))
-      if (valueSet.size == this.slots.length) {
-        sellValue += tricolorBonus
-      }
+    let slotsValue = this.slots.reduce((accumulator, currentSlot) => {
+      return accumulator + this.getSlotValue(currentSlot, mushroomTable, stageBonusExponent)
+    }, 0)
+    return (slotsValue + bonus) * multiplier
+  }
+
+  getSlotValue (slot, mushroomTable, stageBonusExponent) {
+    let slotValue = 0
+    let slotTableEquivalent = mushroomTable.find(mushroom => mushroom.name === slot.type)
+    if (slotTableEquivalent) {
+      slotValue = slotTableEquivalent.value * slot.stage + Math.pow(slot.stage - 1, stageBonusExponent)
     }
-    sellValue *= multiplier
-    return sellValue
+    return slotValue
   }
 
   isFull () {
@@ -99,8 +92,22 @@ class Inventory {
     }
   }
 
-  empty () {
-    this.slots.forEach(slot => slot.empty())
+  slotsAllIdentical () {
+    return this.slotsAllSameType() && this.slotsAllSameStage()
+  }
+
+  slotsAllSameStage () {
+    return this.slots.every(slot => slot.stage == this.slots[0].stage)
+  }
+
+  slotsAllSameType () {
+    return this.slots.every(slot => slot.type == this.slots[0].type)
+  }
+
+  slotsAllDifferent () {
+    let valueSet = new Set()
+    this.slots.every(slot => valueSet.add(slot.type))
+    return valueSet.size == this.slots.length
   }
 
 }

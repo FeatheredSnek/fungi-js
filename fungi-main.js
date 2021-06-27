@@ -1,5 +1,3 @@
-const settings = Settings.getDefault()
-
 const boardDOMElement = document.getElementById('board')
 const inventoryDOMElement = document.getElementById('inventory')
 const goldCounterDOMElement = document.getElementById('gold-counter')
@@ -12,12 +10,12 @@ const buttonRestartDOMElement = document.getElementById('button-restart')
 
 let currentGame
 let renderer
-let control
+let controlState
 
 function advanceHandler () {
-  if (control) {
+  if (controlState) {
     lockControls(Renderer.animationTimes.slotAction)
-    let response = currentGame.advanceBoard()
+    let response = currentGame.actionAdvance()
     renderer.updateBoard()
     renderer.updateTimeCounter()
     renderer.updateGoldCounter()
@@ -29,19 +27,17 @@ function advanceHandler () {
 }
 
 function slotPickupHandler () {
-  if (control) {
+  if (controlState) {
     let slotId = this.id
     let slotDOMElement = this
-    let response = currentGame.pickUpFromBoard(this.id)
+    let response = currentGame.actionPickup(this.id)
     if (response === Game.actionResponses.SLOT_NOT_PICKABLE) {
       lockControls(Renderer.animationTimes.slotWarning)
       renderer.wiggleSlot(slotDOMElement)
-      renderer.renderWarning('slot_not_pickable')
     }
     else if (response === Game.actionResponses.INVENTORY_FULL) {
       lockControls(Renderer.animationTimes.slotWarning)
       renderer.wiggleSlot(slotDOMElement)
-      renderer.renderWarning('inventory full, cant pick up')
     }
     else {
       lockControls(Renderer.animationTimes.slotAction)
@@ -56,13 +52,13 @@ function slotPickupHandler () {
 }
 
 function sellHandler () {
-  if (control) {
-    let response = currentGame.sellInventory()
+  if (controlState) {
+    let response = currentGame.actionSell()
     if (response === Game.actionResponses.INVENTORY_NOT_SELLABLE) {
       lockControls(Renderer.animationTimes.slotWarning)
       renderer.buttonPopIn(this, 'small')
       renderer.wiggleInventory()
-      renderer.renderWarning('inventory_not_sellable')
+
     }
     else {
       lockControls(Renderer.animationTimes.buttonAction)
@@ -91,7 +87,6 @@ function failStateHandler () {
   removeEvents()
 }
 
-
 function connectEvents () {
   for (let childNode of boardDOMElement.children) {
     childNode.addEventListener('click', slotPickupHandler)
@@ -110,15 +105,15 @@ function removeEvents () {
 }
 
 function lockControls (lockTime) {
-  control = false
+  controlState = false
   setTimeout(() => {
-    control = true
+    controlState = true
   }, lockTime)
 }
 
 function _init() {
-  control = true
-  currentGame = new Game(9, 3, settings)
+  controlState = true
+  currentGame = new Game(9, 3, Settings.getDefault())
   renderer = new Renderer(
     currentGame,
     boardDOMElement,
@@ -130,7 +125,6 @@ function _init() {
   currentGame.start()
   renderer.initialRender()
   connectEvents()
-  console.log('start');
 }
 
 

@@ -38,37 +38,29 @@ class Slot {
     if (this.type != null && this.type != 'rock') {
       if (this.stage < 3) {
         this.stage += 1
-        // console.log('grow');
       }
       else {
         this.empty()
-        // console.log('whither slot');
       }
     }
     else if (this.type == 'rock') {
       if (this.stage > 1) {
         this.stage -= 1
-        // console.log('whither rock');
       }
       else {
         this.type = null
         this.stage = null
-        // console.log('destroy rock');
       }
     }
     else if (this.type == null) {
-      console.log('try repopulating');
       if (repopulationFactor > Math.random()) {
         this.populateRandom(mushroomTable, tresholdTable, frequencySum)
-        // console.log('treshold matched, repopulate');
       }
     }
   }
 
   getPickupCost (baseCost, pickupPenalty, pickupPenaltyExponent) {
-    // let cost = baseCost + (this.stage - 1) * pickupPenalty
-    let cost = baseCost + pickupPenalty * Math.pow(this.stage-1 , pickupPenaltyExponent)
-    return cost
+    return baseCost + pickupPenalty * Math.pow(this.stage-1 , pickupPenaltyExponent)
   }
 
   isPickable () {
