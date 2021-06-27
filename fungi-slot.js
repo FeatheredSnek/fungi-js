@@ -1,14 +1,23 @@
+/*
+Rudimentary slot object that knows nothing about the world around it.
+Still, it can populate and advance itself, given that it receives
+appropriate data from its parent.
+Provides functionalities required by the board and the inventory.
+*/
+
 class Slot {
   constructor () {
     this.type = null
     this.stage = null
   }
 
+  // Debug mode of population, not used anywhere
   populateFixed (_type, _stage) {
     this.type = _type
     this.stage = _stage
   }
 
+  // Proper mode of population - requires data about population conditions
   populateRandom (mushroomTable, tresholdTable, frequencySum) {
     let seed = Math.random() * frequencySum
     this.type = null
@@ -22,6 +31,10 @@ class Slot {
     }
   }
 
+  /*
+  Three functions below (each named with a single verb) are used to control
+  the slot and are usually called by its parent (board or inventory).
+  */
   pickUp () {
     let returnType = this.type
     let returnStage = this.stage
@@ -59,6 +72,9 @@ class Slot {
     }
   }
 
+  /*
+  Two helper functions used by the Game (board) to determine slot pickability
+  */
   getPickupCost (baseCost, pickupPenalty, pickupPenaltyExponent) {
     return baseCost + pickupPenalty * Math.pow(this.stage-1 , pickupPenaltyExponent)
   }
