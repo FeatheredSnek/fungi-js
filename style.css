@@ -33,6 +33,7 @@
   box-sizing: border-box;
 }
 
+/* Main document styling, centers and positions the app & components */
 
 body {
   padding: 0;
@@ -57,6 +58,8 @@ main {
   margin-top: var(--component-gap);
 }
 
+/* Top scoreboard styling - icons are inside the value boxes and are shifted
+with the position value (transform is used later in animations)*/
 
 .scoreboard {
   color: black;
@@ -89,6 +92,9 @@ main {
   color: var(--font-color-warning);
 }
 
+/* Board styling - the grids are fixed and scaled to be 3 slots wide,
+wider grids would require slot size recalculation; currently they use
+fixed height in rem to match the width and make sort-of-square slots */
 
 .board {
   background-color: var(--board-border-color);
@@ -120,6 +126,8 @@ main {
   cursor: pointer;
 }
 
+/* Inventory styling - the background image representing the 'shadow' of
+the inventory boxes can be scaled and moved around for different effects */
 
 .inventory {
   background-color: var(--inventory-border-color);
@@ -135,6 +143,9 @@ main {
   background-size: 105%;
 }
 
+/* Slot styling - a simple box with a fungus/rock/empty image within
+Below are also all the animations with their respective keyframes
+- this includes slot as well as button and score icon animations */
 
 .slot {
   width: 100%;
@@ -272,6 +283,9 @@ main {
   }
 }
 
+/* Button styling - buttons have fixed height but remain somewhat resizeable
+with % based background (i.e. arrows and icons) sizes  */
+
 
 .control-buttons {
   width: 100%;
@@ -327,6 +341,9 @@ button {
     url('images/ui/button-restart-icon.svg');
 }
 
+/* Overlay styling - overlay serves currently as game over screen so the sizing
+is rather static; contrary to slots/buttons the overlay uses transition property
+as a means of animating (one way animations) */
 
 .overlay {
   z-index: 2;
