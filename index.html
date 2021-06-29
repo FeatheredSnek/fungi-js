@@ -13,6 +13,9 @@
 
     <main>
 
+      <!-- Overlay element is displayed above everything else with css transitions
+      serving for animations. Here it serves only as a game over screen with
+      a restart button. -->
       <div class="overlay hidden invisible" id="overlay">
         <div class="shifted-up" id="overlay-message">
           <p class="overlay-text overlay-big">
@@ -25,6 +28,8 @@
         </div>
       </div>
 
+      <!-- Scoreboard contains counters with their respective animated icons.
+      The container is flexible so it would be possible to add more counters. -->
       <div class="scoreboard">
         <div class="gold-counter-container scoreboard-item">
           <img src="images/ui/icon-small-gold.svg" class="scoreboard-icon"/>
@@ -36,6 +41,8 @@
         </div>
       </div>
 
+      <!-- Board and invetory elements are initially empty, their contents are
+      generated and displayed by the Renderer script. -->
       <div class="component board">
         <div class="grid grid-3x3" id="board">
         </div>
@@ -46,6 +53,9 @@
         </div>
       </div>
 
+      <!-- Control buttons at the bottom are inside a flex container, so it would
+      be possible to add more (though background styling would need to be
+      adjusted to accomodate for smaller icons) -->
       <div class="component control-buttons">
         <button class="sell" id="button-sell" name="Sell inventory"></button>
         <button class="advance" id="button-advance" name="Advance time"></button>
